@@ -496,7 +496,7 @@ public class Diagnostic extends CordovaPlugin{
             boolean granted = hasPermission(androidPermission);
             if(granted){
                 statuses.put(permission, Diagnostic.STATUS_GRANTED);
-            }else{
+            }else if(Build.VERSION.SDK_INT > 23 || !permission.equals("ACCESS_BACKGROUND_LOCATION") ){
                 boolean showRationale = shouldShowRequestPermissionRationale(this.cordova.getActivity(), androidPermission);
                 if(!showRationale){
                     if(isPermissionRequested(permission)){
